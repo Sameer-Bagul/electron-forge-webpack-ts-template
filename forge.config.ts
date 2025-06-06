@@ -14,9 +14,20 @@ import { rendererConfig } from './webpack.renderer.config';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    icon: './assets/logo', // Optional: .ico file path without extension
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [
+    new MakerSquirrel({
+      name: 'my_app',
+      setupIcon: './assets/logo.ico',
+      authors: 'Your Name',
+      description: 'An Electron app built with Webpack and TS',
+    }),
+    new MakerZIP(),
+    new MakerRpm(),
+    new MakerDeb(),
+  ],
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
